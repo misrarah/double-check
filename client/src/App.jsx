@@ -38,13 +38,7 @@ export default function App() {
             />
           </div>
         )}
-        <div className="px-6 py-5 flex items-center gap-5" style={{ borderBottom: '1px solid var(--border)' }}>
-          <img
-            src="/logo.png"
-            alt="Double Check"
-            className="flex-shrink-0"
-            style={{ height: 64, width: 'auto' }}
-          />
+        <div className="px-6 py-5" style={{ borderBottom: '1px solid var(--border)' }}>
           <div>
             {channel?.name && (
               <h1

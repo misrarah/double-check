@@ -22,16 +22,6 @@ export default function Navbar({ channel, onSearch }) {
         transition: 'box-shadow 0.2s',
       }}
     >
-      {/* Left: logo */}
-      <div className="flex items-center">
-        <img
-          src="/logo.png"
-          alt="Double Check"
-          className="flex-shrink-0"
-          style={{ height: 36, width: 'auto' }}
-        />
-      </div>
-
       {/* Right: search */}
       <SearchBar onSearch={handleSearch} />
     </nav>
