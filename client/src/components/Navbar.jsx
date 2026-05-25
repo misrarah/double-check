@@ -22,27 +22,14 @@ export default function Navbar({ channel, onSearch }) {
         transition: 'box-shadow 0.2s',
       }}
     >
-      {/* Left: avatar + channel name */}
-      <div className="flex items-center gap-3">
-        {channel?.avatar && (
-          <img
-            src={channel.avatar}
-            alt={channel.name}
-            className="rounded-full object-cover flex-shrink-0"
-            style={{ width: 32, height: 32 }}
-          />
-        )}
-        {channel?.name && (
-          <span
-            className="text-2xl leading-none tracking-wide"
-            style={{
-              fontFamily: 'var(--font-display)',
-              color: 'var(--text-primary)',
-            }}
-          >
-            {channel.name}
-          </span>
-        )}
+      {/* Left: logo */}
+      <div className="flex items-center">
+        <img
+          src="/logo.png"
+          alt="Double Check"
+          className="flex-shrink-0"
+          style={{ height: 36, width: 'auto' }}
+        />
       </div>
 
       {/* Right: search */}

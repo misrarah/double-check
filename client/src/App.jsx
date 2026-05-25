@@ -38,15 +38,13 @@ export default function App() {
             />
           </div>
         )}
-        <div className="px-6 py-5 flex items-center gap-4" style={{ borderBottom: '1px solid var(--border)' }}>
-          {channel?.avatar && (
-            <img
-              src={channel.avatar}
-              alt={channel?.name}
-              className="rounded-full object-cover flex-shrink-0"
-              style={{ width: 72, height: 72, border: '3px solid var(--surface)' }}
-            />
-          )}
+        <div className="px-6 py-5 flex items-center gap-5" style={{ borderBottom: '1px solid var(--border)' }}>
+          <img
+            src="/logo.png"
+            alt="Double Check"
+            className="flex-shrink-0"
+            style={{ height: 64, width: 'auto' }}
+          />
           <div>
             {channel?.name && (
               <h1
