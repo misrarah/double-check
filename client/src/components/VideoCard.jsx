@@ -65,6 +65,20 @@ export default function VideoCard({ video }) {
         <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
           {video.viewCount} views · {publishedAgo}
         </p>
+        {video.description && (
+          <p
+            className="text-xs mt-2 leading-relaxed"
+            style={{
+              color: 'var(--text-secondary)',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
+            {video.description}
+          </p>
+        )}
       </div>
     </a>
   );
