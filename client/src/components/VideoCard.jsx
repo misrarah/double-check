@@ -1,9 +1,16 @@
 import { formatDistanceToNow } from 'date-fns';
+import { useState } from 'react';
+
+const PREVIEW_LENGTH = 150;
 
 export default function VideoCard({ video }) {
   const publishedAgo = video.publishedAt
     ? formatDistanceToNow(new Date(video.publishedAt), { addSuffix: true })
     : '';
+  const [expanded, setExpanded] = useState(false);
+  const desc = video.description || '';
+  const isLong = desc.length > PREVIEW_LENGTH;
+  const displayDesc = expanded || !isLong ? desc : desc.slice(0, PREVIEW_LENGTH) + '…';
 
   return (
     <a
@@ -65,19 +72,24 @@ export default function VideoCard({ video }) {
         <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
           {video.viewCount} views · {publishedAgo}
         </p>
-        {video.description && (
-          <p
-            className="text-xs mt-2 leading-relaxed"
-            style={{
-              color: 'var(--text-secondary)',
-              display: '-webkit-box',
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
-            }}
-          >
-            {video.description}
-          </p>
+        {desc && (
+          <div className="mt-2" onClick={e => e.preventDefault()}>
+            <p
+              className="text-xs leading-relaxed whitespace-pre-line"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              {displayDesc}
+            </p>
+            {isLong && (
+              <button
+                className="text-xs mt-1 font-medium"
+                style={{ color: 'var(--text-primary)', background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                onClick={() => setExpanded(v => !v)}
+              >
+                {expanded ? 'Show less' : 'Show more'}
+              </button>
+            )}
+          </div>
         )}
       </div>
     </a>

@@ -79,7 +79,7 @@ async function directFetchVideos(maxResults = 12, pageToken = '') {
     return {
       id,
       title: sn.title || '',
-      description: (sn.description || '').slice(0, 200),
+      description: sn.description || '',
       thumbnail: th.maxres?.url || th.high?.url || th.medium?.url || '',
       publishedAt: sn.publishedAt || '',
       duration: parseDuration(ct.duration || 'PT0S'),
