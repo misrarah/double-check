@@ -29,12 +29,12 @@ export default function App() {
       {/* Hero: banner + channel info */}
       <div>
         {channel?.banner && (
-          <div style={{ maxHeight: 180, overflow: 'hidden' }}>
+          <div>
             <img
               src={channel.banner}
               alt="Channel banner"
-              className="w-full object-cover"
-              style={{ maxHeight: 180, display: 'block' }}
+              className="w-full"
+              style={{ display: 'block', height: 'auto' }}
             />
           </div>
         )}
