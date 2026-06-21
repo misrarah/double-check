@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import Navbar from './components/Navbar';
 import VideoPlayer from './components/VideoPlayer';
 import VideoGrid from './components/VideoGrid';
 import SearchBar from './components/SearchBar';
@@ -31,8 +30,6 @@ export default function App() {
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-      <Navbar channel={channel} />
-
       {channel?.banner && (
         <img
           src={channel.banner}
