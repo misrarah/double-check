@@ -7,7 +7,7 @@ export default function VideoGrid({ videos, isLoading, hasMore, onLoadMore, acti
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" style={{ gap: 24 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 8 }}>
         {showInitialSkeleton
           ? Array.from({ length: 9 }).map((_, i) => <SkeletonCard key={i} />)
           : videos.map((video, idx) => (

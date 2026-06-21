@@ -1,7 +1,7 @@
 import { formatDistanceToNow } from 'date-fns';
 import { useState } from 'react';
 
-const PREVIEW_LENGTH = 150;
+const PREVIEW_LENGTH = 120;
 
 export default function VideoCard({ video, isActive, onClick }) {
   const publishedAgo = video.publishedAt
@@ -15,13 +15,14 @@ export default function VideoCard({ video, isActive, onClick }) {
   return (
     <div
       onClick={onClick}
-      className="group block rounded-lg overflow-hidden transition-all duration-200 cursor-pointer"
+      className="group flex gap-3 rounded-lg overflow-hidden transition-all duration-200 cursor-pointer p-2"
       style={{
-        background: 'var(--surface)',
+        background: isActive ? 'var(--surface)' : 'transparent',
         border: isActive ? '2px solid var(--accent)' : '2px solid transparent',
       }}
     >
-      <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
+      {/* Thumbnail — ~30% width */}
+      <div className="relative flex-shrink-0 overflow-hidden rounded" style={{ width: '30%', aspectRatio: '16/9', alignSelf: 'flex-start' }}>
         <img
           src={video.thumbnail}
           alt={video.title}
@@ -34,27 +35,29 @@ export default function VideoCard({ video, isActive, onClick }) {
         >
           <div
             className="flex items-center justify-center rounded-full"
-            style={{ width: 56, height: 56, background: 'var(--accent)' }}
+            style={{ width: 28, height: 28, background: 'var(--accent)' }}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
               <path d="M8 5v14l11-7z" />
             </svg>
           </div>
         </div>
         {video.duration && (
           <span
-            className="absolute bottom-2 right-2 text-white text-xs font-mono px-1.5 py-0.5 rounded"
-            style={{ background: 'rgba(0,0,0,0.75)' }}
+            className="absolute bottom-1 right-1 text-white font-mono px-1 py-0.5 rounded"
+            style={{ background: 'rgba(0,0,0,0.75)', fontSize: 10 }}
           >
             {video.duration}
           </span>
         )}
       </div>
 
-      <div className="p-3">
+      {/* Info — remaining width */}
+      <div className="flex-1 min-w-0">
         <h3
-          className="font-semibold text-sm leading-snug mb-1"
+          className="font-semibold leading-snug mb-1"
           style={{
+            fontSize: 13,
             color: 'var(--text-primary)',
             fontFamily: 'var(--font-body)',
             display: '-webkit-box',
@@ -65,18 +68,17 @@ export default function VideoCard({ video, isActive, onClick }) {
         >
           {video.title}
         </h3>
-        <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+        <p style={{ fontSize: 11, color: 'var(--text-secondary)', margin: 0 }}>
           {video.viewCount} views · {publishedAgo}
         </p>
         {desc && (
-          <div className="mt-2" onClick={e => e.stopPropagation()}>
-            <p className="text-xs leading-relaxed whitespace-pre-line" style={{ color: 'var(--text-secondary)' }}>
+          <div className="mt-1" onClick={e => e.stopPropagation()}>
+            <p className="leading-relaxed whitespace-pre-line" style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
               {displayDesc}
             </p>
             {isLong && (
               <button
-                className="text-xs mt-1 font-medium"
-                style={{ color: 'var(--accent)', background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                style={{ fontSize: 11, color: 'var(--accent)', background: 'none', border: 'none', padding: 0, cursor: 'pointer', marginTop: 2 }}
                 onClick={() => setExpanded(v => !v)}
               >
                 {expanded ? 'Show less' : 'Show more'}
