@@ -1,7 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
-import SearchBar from './SearchBar';
+import { useEffect, useState } from 'react';
 
-export default function Navbar({ channel, onSearch }) {
+export default function Navbar({ channel }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -10,20 +9,24 @@ export default function Navbar({ channel, onSearch }) {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  const handleSearch = useCallback(q => onSearch(q), [onSearch]);
-
   return (
     <nav
-      className="sticky top-0 z-50 flex items-center justify-between px-6 h-14"
+      className="sticky top-0 z-50 flex items-center px-6 h-14"
       style={{
         background: 'var(--surface)',
         borderBottom: '1px solid var(--border)',
-        boxShadow: scrolled ? '0 2px 8px rgba(0,0,0,0.08)' : 'none',
+        boxShadow: scrolled ? '0 2px 12px rgba(0,0,0,0.5)' : 'none',
         transition: 'box-shadow 0.2s',
       }}
     >
-      {/* Right: search */}
-      <SearchBar onSearch={handleSearch} />
+      {channel?.name && (
+        <span
+          className="text-2xl"
+          style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', letterSpacing: '0.05em' }}
+        >
+          {channel.name}
+        </span>
+      )}
     </nav>
   );
 }

@@ -34,7 +34,7 @@ export default function SearchBar({ onSearch }) {
         onChange={e => setValue(e.target.value)}
         className="pl-9 pr-8 py-2 text-sm rounded-full outline-none transition-all"
         style={{
-          background: '#f2f2f2',
+          background: 'var(--surface)',
           border: '1px solid var(--border)',
           color: 'var(--text-primary)',
           fontFamily: 'var(--font-body)',

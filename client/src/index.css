@@ -3,19 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --bg: #fafafa;
-  --surface: #ffffff;
-  --border: #e5e5e5;
+  --bg: #0f0f0f;
+  --surface: #1a1a1a;
+  --border: #2a2a2a;
   --accent: #ff0000;
-  --text-primary: #0f0f0f;
-  --text-secondary: #606060;
+  --text-primary: #ffffff;
+  --text-secondary: #aaaaaa;
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'DM Sans', sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -26,9 +24,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
-  min-height: 100vh;
-}
+#root { min-height: 100vh; }
 
 @keyframes shimmer {
   0% { background-position: 200% 0; }
@@ -36,7 +32,7 @@ body {
 }
 
 .shimmer {
-  background: linear-gradient(90deg, #e5e5e5 25%, #f0f0f0 50%, #e5e5e5 75%);
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
