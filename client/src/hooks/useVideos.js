@@ -1,6 +1,18 @@
 import { useState, useEffect } from 'react';
 import { fetchVideos } from '../services/api';
 
+async function fetchUntilFull(target, pageToken = '') {
+  const accumulated = [];
+  let token = pageToken;
+  while (accumulated.length < target) {
+    const data = await fetchVideos(12, token);
+    accumulated.push(...data.videos);
+    token = data.nextPageToken || '';
+    if (!token) break;
+  }
+  return { videos: accumulated, nextPageToken: token };
+}
+
 export function useVideos() {
   const [videos, setVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +23,7 @@ export function useVideos() {
   useEffect(() => {
     let cancelled = false;
     setIsLoading(true);
-    fetchVideos(12)
+    fetchUntilFull(12)
       .then(data => {
         if (cancelled) return;
         setVideos(data.videos);
@@ -32,7 +44,7 @@ export function useVideos() {
     if (!hasMore || isLoading) return;
     setIsLoading(true);
     try {
-      const data = await fetchVideos(12, nextPageToken);
+      const data = await fetchUntilFull(12, nextPageToken);
       setVideos(prev => [...prev, ...data.videos]);
       setNextPageToken(data.nextPageToken || '');
       setHasMore(!!data.nextPageToken);
