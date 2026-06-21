@@ -83,7 +83,7 @@ async function directFetchVideos(maxResults = 12, pageToken = '') {
     const ct = d.contentDetails || {};
     const th = sn.thumbnails || {};
     const isoDur = ct.duration || 'PT0S';
-    if (durationSeconds(isoDur) < 180) return null;
+    if (durationSeconds(isoDur) <= 180) return null;
     return {
       id,
       title: sn.title || '',
