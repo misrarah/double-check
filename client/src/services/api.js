@@ -18,6 +18,12 @@ function parseDuration(iso) {
   return `${min}:${String(s).padStart(2, '0')}`;
 }
 
+function durationSeconds(iso) {
+  const m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!m) return 0;
+  return parseInt(m[1] || 0) * 3600 + parseInt(m[2] || 0) * 60 + parseInt(m[3] || 0);
+}
+
 function formatCount(n) {
   n = parseInt(n || 0);
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, '')}M`;
@@ -76,17 +82,19 @@ async function directFetchVideos(maxResults = 12, pageToken = '') {
     const st = d.statistics || {};
     const ct = d.contentDetails || {};
     const th = sn.thumbnails || {};
+    const isoDur = ct.duration || 'PT0S';
+    if (durationSeconds(isoDur) < 180) return null;
     return {
       id,
       title: sn.title || '',
       description: sn.description || '',
       thumbnail: th.maxres?.url || th.high?.url || th.medium?.url || '',
       publishedAt: sn.publishedAt || '',
-      duration: parseDuration(ct.duration || 'PT0S'),
+      duration: parseDuration(isoDur),
       viewCount: formatCount(st.viewCount),
       likeCount: formatCount(st.likeCount),
     };
-  });
+  }).filter(Boolean);
   return { videos, nextPageToken: list.nextPageToken || null };
 }
 
