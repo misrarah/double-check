@@ -19,14 +19,6 @@ export default function Navbar({ channel }) {
         transition: 'box-shadow 0.2s',
       }}
     >
-      {channel?.name && (
-        <span
-          className="text-2xl"
-          style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', letterSpacing: '0.05em' }}
-        >
-          {channel.name}
-        </span>
-      )}
     </nav>
   );
 }
